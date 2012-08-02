@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Scroll Diagonally</title>
+
+<link rel="stylesheet" href="scripts/style.css" type="text/css" />
+
+<script type="text/javascript" src="scripts/js/jquery-1.3.1.min.js"></script>
+<script type="text/javascript" src="scripts/js/jquery.scrollTo.js"></script>
+
+<script>
+
+$(document).ready(function() {
+
+	$('a.panel').click(function () {
+
+		$('a.panel').removeClass('selected');
+		$(this).addClass('selected');
+		
+		current = $(this);
+		
+		$('#wrapper').scrollTo($(this).attr('href'), 800);		
+		
+		return false;
+	});
+
+	$(window).resize(function () {
+		resizePanel();
+	});
+	
+});
+
+function resizePanel() {
+
+	width = $(window).width();
+	height = $(window).height();
+
+	mask_width = width * $('.item').length;
+		
+	$('#debug').html(width  + ' ' + height + ' ' + mask_width);
+		
+	$('#wrapper, .item').css({width: width, height: height});
+	$('#mask').css({width: mask_width, height: height});
+	$('#wrapper').scrollTo($('a.selected').attr('href'), 0);
+		
+}
+
+</script>
+
+</head>
+<body>
+
+
+<div id="wrapper">
+
+	<div id="menuWrap">
+		<div id="menuLogo"></div>
+		<div id="menu">
+			<ul><li>our story</li>
+			<li>why dali</li>
+			<li>our heritage</li>
+			<li>products</li>
+			<li>news</li>
+			<li>contact</li></ul>
+		</div>
+	</div>
+	<div id="mask">
+
+		<!-- first row -->
+
+		<div id="item1" class="item">
+			<a name="item1"></a>
+			<div class="content">item1 
+				<a href="#item1" class="panel">1</a> | 
+				<a href="#item2" class="panel">2</a> | 
+				<a href="#item3" class="panel">3</a>
+			</div>
+		</div>
+		
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="clear"></div>
+
+		<!-- second row -->		
+		
+		<div class="item"></div>
+
+		<div id="item2" class="item">
+			<a name="item2"></a>
+			<div class="content">item2 <a href="#item1" class="panel">back</a></div>
+		</div>
+
+		<div class="item"></div>
+		<div class="clear"></div>
+		
+		<!-- third row -->
+
+		<!--<div class="item"></div>
+		<div class="item"></div>-->
+
+		<div id="item3" class="item">
+			<a name="item3"></a>
+			<div class="content">item3 <a href="#item1" class="panel">back</a></div>
+		</div>
+		
+		<div class="clear"></div>
+
+	</div>
+</div>
+
+</body>
+</html>
